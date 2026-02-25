@@ -1,66 +1,39 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
+    <div>
+      <nav className="bg-blue-500 h-16 flex items-center text-white">
+        <div className="container flex justify-end gap-6 ">
+          <Link href="/">Works</Link>
+          <Link href="/">Blog</Link>
+          <Link href="/">Contact</Link>
+        </div>
+      </nav>
+
+     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+        <div className="max-w-md flex flex-col gap-9">
+          <h1 className="font-bold text-3xl">Halo saya Inas</h1>
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
+            sint. Velit officia consequat duis enim velit mollit. Exercitation
+            veniam consequat sunt nostrud amet.
           </p>
+          <button className="bg-red-500 text-black px-4 py-2 w-[100px] h-[25px]">
+            Klik Saya
+          </button>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="w-[200px] h-[200px] relative rounded-full overflow-hidden">
+          <Image
+            src="/inas_cantik.jpeg"
+            alt="gambar saya"
+            fill
+            className="object-cover"
+          />
         </div>
-      </main>
+      </div>
     </div>
   );
 }
