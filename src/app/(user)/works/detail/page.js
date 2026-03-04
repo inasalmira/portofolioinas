@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default function DetailWorks() {
   return (
     <div style={{padding: 60}}>
         <h1 className="font-bold text-3xl mb-6" style={{marginBottom: 20}}>Inas Almira Khalilah</h1>

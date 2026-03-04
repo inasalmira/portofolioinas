@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default function Works() {
   return (
     <div>
       <div className="min-h-[calc(100vh-4rem)] flex justify-center items-center">
