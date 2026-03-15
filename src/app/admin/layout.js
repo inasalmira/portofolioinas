@@ -56,9 +56,18 @@ export default function AdminLayout({ children }) {
               <Link href="/admin/contact" className="hover:text-gray-300">
                 Contact
               </Link>
+              <Link href="/admin/user" className="hover:text-gray-300">
+                user
+              </Link>
+              <Link href="/admin/comentar" className="hover:text-gray-300">
+                comentar
+              </Link>
+              <Link href="/admin/kategori" className="hover:text-gray-300">
+                kategori
+              </Link>
             </nav>
           </aside>
-          <main className="flex-1 p-10 bg-blue-100 min-h-screen">
+          <main className="w-full bg-blue-100">
             {children}
           </main>
         </div>

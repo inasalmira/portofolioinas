@@ -27,24 +27,22 @@ export default function BasicTable() {
         className="flex justify-between items-center"
         style={{ padding: 30 }}
       >
-        <h1 className="font-bold text-3xl mb-6">Blog</h1>
+        <h1 className="font-bold text-3xl mb-6">User</h1>
         <Button
           style={{ height: 40, width: 150 }}
           className="bg-blue-500 text-white flex justify-center items-center"
         >
           <IoIosAddCircle style={{ scale: 1.5, marginRight: 10 }} />
-          Tambah blog
+          Tambah User
         </Button>
       </div>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell align="right">Judul</TableCell>
-            <TableCell align="right">Tanggal</TableCell>
-            <TableCell align="right">Deskripsi</TableCell>
-            <TableCell align="right">Gambar</TableCell>
-            <TableCell align="right">Kategori</TableCell>
+            <TableCell align="right">Nama</TableCell>
+            <TableCell align="right">Imail</TableCell>
+            <TableCell align="right">Password</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,8 +57,6 @@ export default function BasicTable() {
               <TableCell align="right">{row.calories}</TableCell>
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
