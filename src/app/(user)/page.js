@@ -12,7 +12,7 @@ export default function Home() {
             sint. Velit officia consequat duis enim velit mollit. Exercitation
             veniam consequat sunt nostrud amet.
           </p>
-          <button className="font-bold bg-red-500 text-black rounded-full px-4 py-2 w-[100px] h-[25px]">
+          <button className="font-bold bg-red-500 text-black rounded-full px-4 w-[100px] h-[25px]">
             Klik Saya
           </button>
         </div>

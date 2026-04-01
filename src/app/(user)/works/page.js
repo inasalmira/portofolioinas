@@ -21,7 +21,7 @@ export default function Works() {
                 <div className="max-w-md flex flex-col gap-3">
                   <h2 className="font-bold text-3xl">siaka</h2>
                   <div className="flex">
-                    <button className="bg-black text-white rounded-full px-4 py-2 w-[100px] h-[25px]">
+                    <button className="bg-black text-white rounded-full px-4 w-[100px] h-[25px]">
                       2025
                     </button>
 
@@ -55,7 +55,7 @@ export default function Works() {
                 <div className="max-w-md flex flex-col gap-3">
                   <h2 className="font-bold text-3xl">siaka</h2>
                   <div className="flex">
-                    <button className="bg-black text-white rounded-full px-4 py-2 w-[100px] h-[25px]">
+                    <button className="bg-black text-white rounded-full px-4 w-[100px] h-[25px]">
                       2025
                     </button>
 
@@ -89,7 +89,7 @@ export default function Works() {
                 <div className="max-w-md flex flex-col gap-3">
                   <h2 className="font-bold text-3xl">siaka</h2>
                   <div className="flex">
-                    <button className="bg-black text-white rounded-full px-4 py-2 w-[100px] h-[25px]">
+                    <button className="bg-black text-white rounded-full px-4 w-[100px] h-[25px]">
                       2025
                     </button>
 

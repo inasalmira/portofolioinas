@@ -22,7 +22,7 @@ export default function UserLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <nav className="bg-blue-500 h-16 flex items-center text-white">
-        <div className="container flex justify-end gap-6 ">
+        <div className="container flex justify-end gap-6 pr-5 ">
           <Link href="/">home</Link>
           <Link href="/works">Works</Link>
           <Link href="/blog">Blog</Link>

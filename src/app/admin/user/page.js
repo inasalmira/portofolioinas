@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
+import Link from "next/link";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -28,13 +29,15 @@ export default function BasicTable() {
         style={{ padding: 30 }}
       >
         <h1 className="font-bold text-3xl mb-6">User</h1>
-        <Button
-          style={{ height: 40, width: 150 }}
-          className="bg-blue-500 text-white flex justify-center items-center"
-        >
-          <IoIosAddCircle style={{ scale: 1.5, marginRight: 10 }} />
-          Tambah User
-        </Button>
+        <Link href="/admin/user/tambah" className="hover:text-gray-300">
+          <Button
+            style={{ height: 40, width: 150 }}
+            className="bg-blue-500 text-white flex justify-center items-center"
+          >
+            <IoIosAddCircle style={{ scale: 1.5, marginRight: 10 }} />
+            Tambah User
+          </Button>
+        </Link>
       </div>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>

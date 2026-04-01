@@ -1,0 +1,1 @@
+ALTER TABLE `kategoris` ADD `deskripsi` longtext NOT NULL;
