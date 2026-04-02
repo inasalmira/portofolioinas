@@ -15,17 +15,17 @@ export default function user() {
 
           <div className="col-span-full">
             <label
-              htmlFor="street-address"
+              htmlFor="nama"
               className="block text-sm/6 font-medium text-gray-900"
             >
-              name
+              nama
             </label>
             <div className="mt-2">
               <input
-                id="street-address"
-                name="street-address"
+                id="nama"
+                name="nama"
                 type="text"
-                autoComplete="street-address"
+                autoComplete="nama"
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
             </div>
@@ -34,15 +34,15 @@ export default function user() {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label
-                htmlFor="first-name"
+                htmlFor="email"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 email
               </label>
               <div className="mt-2">
                 <input
-                  id="first-name"
-                  name="first-name"
+                  id="email"
+                  name="email"
                   type="text"
                   autoComplete="given-name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -52,15 +52,15 @@ export default function user() {
 
             <div className="sm:col-span-3">
               <label
-                htmlFor="last-name"
+                htmlFor="password"
                 className="block text-sm/6 font-medium text-gray-900"
               >
                 password
               </label>
               <div className="mt-2">
                 <input
-                  id="last-name"
-                  name="last-name"
+                  id="password"
+                  name="password"
                   type="text"
                   autoComplete="family-name"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -74,20 +74,20 @@ export default function user() {
           <div className="mt-10 space-y-10">
             <fieldset>
               <legend className="text-sm/6 font-semibold text-gray-900">
-                rol
+                role
               </legend>
 
               <div className="mt-6 space-y-6">
                 <div className="flex items-center gap-x-3">
                   <input
                     defaultChecked
-                    id="push-everything"
-                    name="push-notifications"
+                    id="role-admin"
+                    name="role-admin"
                     type="radio"
                     className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
                   />
                   <label
-                    htmlFor="push-everything"
+                    htmlFor="role-admin"
                     className="block text-sm/6 font-medium text-gray-900"
                   >
                     Admin
@@ -95,13 +95,13 @@ export default function user() {
                 </div>
                 <div className="flex items-center gap-x-3">
                   <input
-                    id="push-email"
-                    name="push-notifications"
+                    id="role-user"
+                    name="role-user"
                     type="radio"
                     className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
                   />
                   <label
-                    htmlFor="push-email"
+                    htmlFor="role-user"
                     className="block text-sm/6 font-medium text-gray-900"
                   >
                     user
