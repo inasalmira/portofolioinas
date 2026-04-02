@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "ccbeb90d-3601-48ad-bcce-8dcfa01b5c62",
+  "id": "49ac7f9c-3ea0-4a6b-8c41-d217cb86d8e5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "blog": {
-      "name": "blog",
+    "blogs": {
+      "name": "blogs",
       "columns": {
         "id": {
           "name": "id",
@@ -21,6 +21,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "gambar": {
+          "name": "gambar",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "isi": {
           "name": "isi",
           "type": "longtext",
@@ -28,22 +35,38 @@
           "notNull": true,
           "autoincrement": false
         },
-        "kategoris_id": {
-          "name": "kategoris_id",
+        "kategori_id": {
+          "name": "kategori_id",
           "type": "int",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "blog_kategoris_id_kategoris_id_fk": {
-          "name": "blog_kategoris_id_kategoris_id_fk",
-          "tableFrom": "blog",
+        "blogs_kategori_id_kategoris_id_fk": {
+          "name": "blogs_kategori_id_kategoris_id_fk",
+          "tableFrom": "blogs",
           "tableTo": "kategoris",
           "columnsFrom": [
-            "kategoris_id"
+            "kategori_id"
           ],
           "columnsTo": [
             "id"
@@ -53,8 +76,8 @@
         }
       },
       "compositePrimaryKeys": {
-        "blog_id": {
-          "name": "blog_id",
+        "blogs_id": {
+          "name": "blogs_id",
           "columns": [
             "id"
           ]
@@ -87,8 +110,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "works_id": {
-          "name": "works_id",
+        "work_id": {
+          "name": "work_id",
           "type": "int",
           "primaryKey": false,
           "notNull": false,
@@ -100,14 +123,30 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "comments_blog_id_blog_id_fk": {
-          "name": "comments_blog_id_blog_id_fk",
+        "comments_blog_id_blogs_id_fk": {
+          "name": "comments_blog_id_blogs_id_fk",
           "tableFrom": "comments",
-          "tableTo": "blog",
+          "tableTo": "blogs",
           "columnsFrom": [
             "blog_id"
           ],
@@ -117,12 +156,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "comments_works_id_works_id_fk": {
-          "name": "comments_works_id_works_id_fk",
+        "comments_work_id_works_id_fk": {
+          "name": "comments_work_id_works_id_fk",
           "tableFrom": "comments",
           "tableTo": "works",
           "columnsFrom": [
-            "works_id"
+            "work_id"
           ],
           "columnsTo": [
             "id"
@@ -165,12 +204,35 @@
           "notNull": true,
           "autoincrement": true
         },
-        "name": {
-          "name": "name",
+        "nama": {
+          "name": "nama",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "deskripsi": {
+          "name": "deskripsi",
+          "type": "longtext",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {},
@@ -196,8 +258,8 @@
           "notNull": true,
           "autoincrement": true
         },
-        "name": {
-          "name": "name",
+        "nama": {
+          "name": "nama",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true,
@@ -223,6 +285,22 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {},
@@ -262,6 +340,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "gambar": {
+          "name": "gambar",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "isi": {
           "name": "isi",
           "type": "longtext",
@@ -269,22 +354,38 @@
           "notNull": true,
           "autoincrement": false
         },
-        "kategoris_id": {
-          "name": "kategoris_id",
+        "kategori_id": {
+          "name": "kategori_id",
           "type": "int",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_TIMESTAMP"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "works_kategoris_id_kategoris_id_fk": {
-          "name": "works_kategoris_id_kategoris_id_fk",
+        "works_kategori_id_kategoris_id_fk": {
+          "name": "works_kategori_id_kategoris_id_fk",
           "tableFrom": "works",
           "tableTo": "kategoris",
           "columnsFrom": [
-            "kategoris_id"
+            "kategori_id"
           ],
           "columnsTo": [
             "id"
