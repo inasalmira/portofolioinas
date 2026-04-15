@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
+import { deleteWorks, getAllworks } from "./servis";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,7 +22,8 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default async function BasicTable() {
+  const data = await getAllworks();
   return (
     <TableContainer component={Paper}>
       <div
@@ -43,27 +45,53 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell align="right">Judul</TableCell>
-            <TableCell align="right">Tanggal</TableCell>
-            <TableCell align="right">Deskripsi</TableCell>
-            <TableCell align="right">Gambar</TableCell>
-            <TableCell align="right">Kategori</TableCell>
+            <TableCell align="left">Judul</TableCell>
+            <TableCell align="left">Tanggal</TableCell>
+            <TableCell align="left">Deskripsi</TableCell>
+            <TableCell align="left">Gambar</TableCell>
+            <TableCell align="left">Kategori</TableCell>
+            <TableCell align="left">Aksi</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell align="left" component="th" scope="row">
+                {index + 1}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell component="th" scope="row">
+                {row.judul}
+              </TableCell>
+              <TableCell align="left" suppressHydrationWarning>
+                {new Date(row.created_at).toLocaleDateString("id-ID")}
+              </TableCell>
+              <TableCell align="left">{row.isi}</TableCell>
+              <TableCell align="left">
+                {row.gambar ? (
+                  <img
+                    src={row.gambar}
+                    alt={row.judul}
+                    width={80}
+                    className="rounded"
+                  />
+                ) : (
+                  "Tidak ada gambar"
+                )}
+              </TableCell>
+              <TableCell align="left">{row.kategori}</TableCell>
+              <TableCell align="left">
+                <Link href={`/admin/works/${row.id}`} className="mx-3">
+                  {" "}
+                  edit
+                </Link>
+                <form action={deleteWorks}>
+                  <input name="id" value={row.id} type="hidden" />
+                  <button type="submit"> hapus</button>
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

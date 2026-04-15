@@ -1,9 +1,13 @@
 import CancelButton from "../CancelButton";
-import { createUser } from "../servis";
+import { createUser, showUser, updateUser } from "../servis";
 
-export default function UserTambahPage() {
+export default async function UserTambahPage({params}) {
+    const{id}=await params
+
+    const data=await showUser(id)
   return (
-    <form action={createUser} className="px-50 mt-5 my-10">
+    <form action={updateUser} className="px-50 mt-5 my-10">
+        <input value={data.id} type="hidden" name="id"/>
       <div className="space-y-12 px-20 pt-10 bg-white rounded-2xl">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base/7 font-semibold text-gray-900">
@@ -26,6 +30,7 @@ export default function UserTambahPage() {
                 id="nama"
                 type="text"
                 autoComplete="nama"
+                defaultValue={data.nama}
                 
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
               />
@@ -46,6 +51,7 @@ export default function UserTambahPage() {
                   id="email"
                   type="text"
                   autoComplete="given-name"
+                  defaultValue={data.email}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -64,6 +70,7 @@ export default function UserTambahPage() {
                   id="password"
                   type="text"
                   autoComplete="family-name"
+                  defaultValue={data.password}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
@@ -82,7 +89,7 @@ export default function UserTambahPage() {
                 <div className="flex items-center gap-x-3">
                   <input
                     name="role"
-                    defaultChecked
+                    defaultChecked={data?.role === "admin"}
                     id="role-admin"
                     value="admin"
                     type="radio"
@@ -98,6 +105,7 @@ export default function UserTambahPage() {
                 <div className="flex items-center gap-x-3">
                   <input
                     name="role"
+                    defaultChecked={data?.role === "user"}
                     id="role-user"
                     value="user"
                     type="radio"
@@ -114,7 +122,6 @@ export default function UserTambahPage() {
             </fieldset>
             <div className="flex justify-end gap-4">
               <CancelButton/>
-              
               <button
                 type="submit"
                 className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

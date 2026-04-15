@@ -1,3 +1,5 @@
+
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
+import { deleteUser, getAllUser } from "./servis";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,7 +24,8 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default async function BasicTable() {
+  const data = await getAllUser();
   return (
     <TableContainer component={Paper}>
       <div
@@ -42,24 +46,36 @@ export default function BasicTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell align="right">Nama</TableCell>
-            <TableCell align="right">Imail</TableCell>
-            <TableCell align="right">Password</TableCell>
+            <TableCell align="left">No</TableCell>
+            <TableCell align="left">Nama</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Role</TableCell>
+            <TableCell align="left">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
+              <TableCell align="left" component="th" scope="row">
+                {index+1}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="left" component="th" scope="row">
+                {row.nama}
+              </TableCell>
+              <TableCell  align="left"component="th" scope="row">
+                {row.email}
+              </TableCell>
+              <TableCell align="left">{row.role}</TableCell>
+              <TableCell align="left">
+                <Link href={`/admin/user/${row.id}`} className="mx-3"> edit</Link>
+                <form action={deleteUser}>
+                  <input name="id" value={row.id} type="hidden"/>
+                <button type="submit"> hapus</button>
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
