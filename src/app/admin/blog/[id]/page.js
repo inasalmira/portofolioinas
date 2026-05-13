@@ -1,12 +1,15 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { getAllKategoris } from "../../kategori/servis";
-import { createblogs } from "../servis";
+import { showblogs, updateblogs,  } from "../servis";
 
-export default async function user() {
-   const dataKategori = await getAllKategoris();
+export default async function user({ params }) {
+  const { id } = await params;
+  const data = await showblogs(id);
+  const dataKategori = await getAllKategoris();
   return (
-    <form action={createblogs} className="px-50 mt-5 my-10">
+    <form action={updateblogs} className="px-50 mt-5 my-10">
+         <input value={data.id} type="hidden" name="id"/>
       <div className="space-y-12 px-20 pt-10 bg-white rounded-2xl">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base/7 font-semibold text-gray-900">
@@ -21,10 +24,11 @@ export default async function user() {
               htmlFor="street-address"
               className="block text-sm/6 font-medium text-gray-900"
             >
-            judul
+              Judul
             </label>
             <div className="mt-2">
               <input
+                defaultValue={data.judul}
                 id="street-address"
                 name="judul"
                 type="text"
@@ -46,11 +50,11 @@ export default async function user() {
               </label>
               <div className="mt-2">
                 <textarea
+                  defaultValue={data.isi}
                   id="about"
                   name="isi"
                   rows={3}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  defaultValue={""}
                 />
               </div>
               <p className="mt-3 text-sm/6 text-gray-600">
@@ -80,6 +84,7 @@ export default async function user() {
                         id="file-upload"
                         name="gambar"
                         type="file"
+                        accept="image/*"
                         className="sr-only"
                       />
                     </label>
@@ -102,13 +107,17 @@ export default async function user() {
                 <select
                   id="country"
                   name="kategori_id"
-                  autoComplete="country-name"
+                  defaultValue={data?.kategori_id}
                   className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 >
-                  {dataKategori.map((row, index) => (
-                    <option value={row.id}key={row.id}>{row.nama}</option>
+                  <option value="">-- Pilih Kategori --</option>
+                  {dataKategori.map((row) => (
+                    <option key={row.id} value={row.id}>
+                      {row.nama}
+                    </option>
                   ))}
                 </select>
+
                 <ChevronDownIcon
                   aria-hidden="true"
                   className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"

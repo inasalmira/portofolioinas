@@ -1,10 +1,13 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import { createkategori } from "../servis";
+import { createkategori, showkategori, updatekategori } from "../servis";
 
-export default function user() {
+export default async function user({ params}) {
+    const { id } = await params;
+      const data = await showkategori(id);
   return (
-    <form action={createkategori}  className="px-50 mt-5 my-10">
+    <form action={updatekategori}  className="px-50 mt-5 my-10">
+        <input value={data.id} type="hidden" name="id"/>
       <div className="space-y-12 px-20 pt-10 bg-white rounded-2xl">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base/7 font-semibold text-gray-900">
@@ -23,7 +26,7 @@ export default function user() {
             </label>
             <div className="mt-2">
               <input
-                id="street-address"
+                defaultValue={data.nama}
                 name="nama"
                 type="text"
                 autoComplete="street-address"
@@ -44,11 +47,11 @@ export default function user() {
               </label>
               <div className="mt-2">
                 <textarea
-                  id="about"
+                   defaultValue={data.deskripsi}
                   name="deskripsi"
                   rows={3}
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  defaultValue={""}
+                  
                 />
               </div>
               <p className="mt-3 text-sm/6 text-gray-600">

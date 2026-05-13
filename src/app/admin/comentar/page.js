@@ -5,6 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { getAllcomments } from './servis';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -18,29 +19,30 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default async function BasicTable() {
+   const data = await getAllcomments()
   return (
     <TableContainer component={Paper}>
-      <h1 className="font-bold text-3xl mb-6" style={{padding: 30}} >Comentar</h1>
+      <h1 className="font-bold text-3xl mb-6" style={{padding: 30}} >comments</h1>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell align="right">Isi komentar</TableCell>
-            <TableCell align="right">user</TableCell>
-            <TableCell align="right">Works</TableCell>
+            <TableCell align="left">komentar</TableCell>
+            <TableCell align="left">user</TableCell>
+            <TableCell align="left">konten</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">{row.name}</TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell component="th" scope="row">{index + 1}</TableCell>
+              <TableCell align="left">{row.komentar}</TableCell>
+              <TableCell align="left">{row.user}</TableCell>
+              <TableCell align="left">{row.konten}</TableCell>
             </TableRow>
           ))}
         </TableBody>

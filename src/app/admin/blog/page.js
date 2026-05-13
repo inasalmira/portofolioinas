@@ -8,6 +8,9 @@ import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
+import DeleteButton from "../works/delete";
+import { deleteblogs, getAllblogs } from "./servis";
+import FormatDate from "../works/componen";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,12 +24,15 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default async function BasicTable() {
+  const data = await getAllblogs()
   return (
     <TableContainer component={Paper}>
       <div
+
         className="flex justify-between items-center"
         style={{ padding: 30 }}
+
       >
         <h1 className="font-bold text-3xl mb-6">Blog</h1>
         <Link href="/admin/blog/tambah" className="hover:text-gray-300">
@@ -43,27 +49,50 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell align="right">Judul</TableCell>
-            <TableCell align="right">Tanggal</TableCell>
-            <TableCell align="right">Deskripsi</TableCell>
-            <TableCell align="right">Gambar</TableCell>
-            <TableCell align="right">Kategori</TableCell>
+            <TableCell align="left">Judul</TableCell>
+            <TableCell align="left">Tanggal</TableCell>
+            <TableCell align="left">Deskripsi</TableCell>
+            <TableCell align="left">Gambar</TableCell>
+            <TableCell align="left">Kategori</TableCell>
+            <TableCell align="left">Aksi</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {index + 1}
+
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="left">{row.judul}</TableCell>
+              <TableCell align="left"> <FormatDate date={row.created_at} /></TableCell>
+              <TableCell align="left">{row.isi}</TableCell>
+              <TableCell align="left">
+                {row.gambar ? (
+                  <img
+                    src={row.gambar}
+                    alt={row.judul}
+                    width={80}
+                    className="rounded"
+                  />
+                ) : (
+                  "Tidak ada gambar"
+                )}
+              </TableCell>
+              <TableCell align="left">{row.kategori}</TableCell>
+              <TableCell align="left">
+                <Link href={`/admin/blog/${row.id}`} className="mx-3">
+                  {" "}
+                  edit
+                </Link>
+                <form action={deleteblogs}>
+                  <input name="id" value={row.id} type="hidden" />
+                  <DeleteButton />
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

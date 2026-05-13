@@ -8,6 +8,10 @@ import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
+import { getAllblogs } from "../blog/servis";
+import { index } from "drizzle-orm/gel-core";
+import { deletekategori, getAllKategoris } from "./servis";
+import DeleteButton from "./delete";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,7 +25,8 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function BasicTable() {
+export default async function BasicTable() {
+  const data = await getAllKategoris()
   return (
     <TableContainer component={Paper}>
       <div
@@ -43,21 +48,29 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>No</TableCell>
-            <TableCell align="right">Nama</TableCell>
-            <TableCell align="right">deskripsi</TableCell>
+            <TableCell align="left">Nama</TableCell>
+            <TableCell align="left">deskripsi</TableCell>
+            <TableCell align="left">aksi</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {index + 1}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="left">{row.nama}</TableCell>
+              <TableCell align="left">{row.deskripsi}</TableCell>
+              <TableCell align="left">
+                <Link href={`/admin/kategori/${row.id}`} className="mx-3">edit</Link>
+                <form action={deletekategori}>
+                  <input name="id" value={row.id} type="hidden" />
+                  <DeleteButton />
+                </form>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
