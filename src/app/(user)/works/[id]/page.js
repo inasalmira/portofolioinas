@@ -30,7 +30,7 @@ export default async function DetailWorks({ params }) {
         <p className="mb-10">{data.isi}</p>
       </div>
 
-      <div className="w-full h-[500px] relative overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-lg" style={{width:600,height:1000}}>
         {data.gambar ? (
           <Image
             src={data.gambar}

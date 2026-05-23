@@ -16,7 +16,7 @@ export default async function DetailWorks({ params }) {
 
     return (
         <div className="flex flex-row" style={{ padding: 60 }}>
-            <div style={{ width: 500, height: 600 }} className=" relative overflow-hidden rounded-lg">
+            <div style={{ width: 500, height: 1000 }} className=" relative overflow-hidden rounded-lg">
                 {data.gambar ? (
                     <Image
                         src={data.gambar}
