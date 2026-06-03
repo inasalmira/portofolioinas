@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { register } from "./servis";
 
 export default function LoginPage() {
     return (
@@ -32,18 +33,20 @@ export default function LoginPage() {
                 </div>
 
                 {/* Form */}
-                <form className="mt-4 space-y-3">
+                <form className="mt-4 space-y-3" action={register}>
 
                     {/* Username */}
                     <input
                         type="NAMA"
                         placeholder="NAMA"
+                        name="nama"
                         className="w-full h-8 px-3 rounded-full bg-gray-100 border border-gray-200 text-[10px] outline-none focus:ring-1 focus:ring-blue-500"
                     />
 
                     <input
                         type="EMAIL"
                         placeholder="EMAIL"
+                        name="email"
                         className="w-full h-8 px-3 rounded-full bg-gray-100 border border-gray-200 text-[10px] outline-none focus:ring-1 focus:ring-blue-500"
                     />
 
@@ -51,6 +54,7 @@ export default function LoginPage() {
                     <input
                         type="password"
                         placeholder="PASSWORD"
+                        name="password"
                         className="w-full h-8 px-3 rounded-full bg-gray-100 border border-gray-200 text-[10px] outline-none focus:ring-1 focus:ring-blue-500"
                     />
 

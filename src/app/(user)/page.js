@@ -10,11 +10,9 @@ export default function Home() {
           <p>
             saya alumni MAN Enrekang dan sekarang saya melanjutkan 
             pendidikan di Universitas DIPA Makassar saya mengambil 
-            prodi Sistem Infomasi.
+           prodi Sistem Infomasi.
           </p>
-          <button className="font-bold bg-red-500 text-black rounded-full px-4 w-[100px] h-[25px]">
-            Klik Saya
-          </button>
+         
         </div>
 
         <div className="w-[200px] h-[200px] relative rounded-lg overflow-hidden">

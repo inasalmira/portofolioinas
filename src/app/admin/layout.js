@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
+import { logout } from "../(auth)/login/servis";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,9 +54,6 @@ export default function AdminLayout({ children }) {
               <Link href="/admin/blog" className="hover:text-gray-300">
                 Blog
               </Link>
-              <Link href="/admin/contact" className="hover:text-gray-300">
-                Contact
-              </Link>
               <Link href="/admin/user" className="hover:text-gray-300">
                 user
               </Link>
@@ -65,6 +63,11 @@ export default function AdminLayout({ children }) {
               <Link href="/admin/kategori" className="hover:text-gray-300">
                 kategori
               </Link>
+              <form action={logout}>
+                <button type="submit" className="hover:underline">
+                  logout
+                </button>
+              </form>
             </nav>
           </aside>
           <main className="w-full bg-blue-100">
