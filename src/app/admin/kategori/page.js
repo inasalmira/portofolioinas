@@ -8,8 +8,6 @@ import Paper from "@mui/material/Paper";
 import { IoIosAddCircle } from "react-icons/io";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
-import { getAllblogs } from "../blog/servis";
-import { index } from "drizzle-orm/gel-core";
 import { deletekategori, getAllKategoris } from "./servis";
 import DeleteButton from "./delete";
 
