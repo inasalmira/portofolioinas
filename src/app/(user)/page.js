@@ -9,7 +9,7 @@ export default function Home() {
           <h1 className="font-bold text-3xl">Halo Saya INAS ALMIRA KHALILAH</h1>
           <p>
             saya alumni MAN Enrekang dan sekarang saya melanjutkan 
-            pendidikan di Universitas DIPA Makassar saya mengambil 
+            pendidikan di Universitas DIPA Makassar dan saya mengambil 
            prodi Sistem Infomasi.
           </p>
          

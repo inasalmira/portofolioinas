@@ -7,11 +7,11 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function login(data) {
-    const email = data.get("email"); 
+    const email = data.get("email");
     const password = data.get("password");
-    
+
     const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
-    
+
     if (result.length > 0) {
         const user = result[0];
         if (user.password === password) {
@@ -21,18 +21,20 @@ export async function login(data) {
                 path: "/",
                 maxAge: 60 * 60 * 24
             });
-            if(user.role==="admin"){
+            cookieStore.set("user_role", user.role, { httpOnly: true, path: "/", maxAge: 60 * 60 * 24 });
+            if (user.role === "admin") {
                 redirect('/admin')
             }
             redirect('/');
         }
         redirect('/login');
     }
-    
+
     redirect('/login');
 }
 export async function logout() {
     const cookieStore = await cookies();
     cookieStore.delete("user_session");
+      cookieStore.delete("user_role");
     redirect('/login');
 }

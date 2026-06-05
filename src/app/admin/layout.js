@@ -37,7 +37,7 @@ export default function AdminLayout({ children }) {
               </button>
 
               <button className=" text-gray-400 rounded-full px-4 py-2 w-[100px] h-[25px]">
-                Peroject
+                Project
               </button>
             </div>
 

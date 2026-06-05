@@ -15,7 +15,7 @@ export async function deleteUser(data) {
     const id = data.get("id");
     await db.delete(users).where(eq(users.id, id))
     
-     redirect("/admin/user")
+    redirect("/admin/user")
 }
 
 export async function createUser(data) {
@@ -23,7 +23,7 @@ export async function createUser(data) {
     const email = data.get("email");
     const password = data.get("password");
     const role = data.get("role");
-    await db.insert(users).values({
+    await db.insert(users).values({ 
         nama: nama , email: email , password: password , role: role 
     })
 

@@ -2,13 +2,13 @@ import { Mail, Phone } from "lucide-react";
 
 export default async function Contact() {
     return (
-        <div className="flex justify-center items-center min-h-screen bg-[#d6cfc7] p-4">
+        <div className="flex justify-center items-center min-h-screen bg-[#f9f9f8] p-4">
             {/* Card Utama */}
-            <div className="w-full max-w-sm bg-white rounded-[32px] p-4 shadow-sm font-sans">
+            <div className="w-full max-w-sm bg-blue-300 rounded-[32px] p-4 shadow-sm font-sans">
 
                 {/* Header Hitam */}
                 <div className="relative bg-[#111612] text-white rounded-[24px] py-8 px-4 text-center mb-6 overflow-hidden">
-                    {/* Titik Hijau di 4 Sudut */}
+
                     <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-[#ccff00]"></div>
                     <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-[#ccff00]"></div>
                     <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-[#ccff00]"></div>
@@ -22,7 +22,6 @@ export default async function Contact() {
                 {/* List Kontak */}
                 <div className="space-y-4 px-2 pb-4">
 
-                    {/* Email - Menggunakan mailto: */}
                     <a
                         href="mailto:inasalmira69@gmail.com"
                         className="flex items-center space-x-4 group transition-transform duration-200 active:scale-95"
@@ -35,7 +34,6 @@ export default async function Contact() {
                         </span>
                     </a>
 
-                    {/* Telepon - Menggunakan tel: */}
                     <a
                         href="https://wa.me/6282191870221"
                         target="_blank"
@@ -43,7 +41,6 @@ export default async function Contact() {
                         className="flex items-center space-x-4 group transition-transform duration-200 active:scale-95"
                     >
                         <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#111612] text-[#ccff00] group-hover:opacity-90 transition-opacity">
-                            {/* Menggunakan SVG Ikon WhatsApp */}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                             </svg>
@@ -53,7 +50,6 @@ export default async function Contact() {
                         </span>
                     </a>
 
-                    {/* Instagram - Tautan Langsung */}
                     <a
                         href="https://instagram.com/inasalmira_"
                         target="_blank"
@@ -72,7 +68,7 @@ export default async function Contact() {
                         </span>
                     </a>
 
-                    {/* Youtube - Tautan Langsung */}
+
                     <a
                         href="https://youtube.com/@cemen"
                         target="_blank"
