@@ -4,8 +4,7 @@ import { kategoris, works } from "../../../db/schema";
 import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import fs from "fs/promises";
-import path from "path";
+import { uploadToCloudinary, deleteFromCloudinary } from "../../../lib/cloudinary";
 
 export async function getAllworks() {
   const data = await getDb()
@@ -20,7 +19,22 @@ export async function getAllworks() {
 
 export async function deleteWorks(data) {
   const id = data.get("id");
+  
+  // Get image URL before deleting
+  const existingData = await getDb()
+    .select()
+    .from(works)
+    .where(eq(works.id, id))
+    .limit(1);
+
+  const imageUrl = existingData[0]?.gambar;
+
   await getDb().delete(works).where(eq(works.id, id));
+
+  // Delete from Cloudinary if image exists
+  if (imageUrl) {
+    await deleteFromCloudinary(imageUrl);
+  }
 
   redirect("/admin/works");
 }
@@ -33,23 +47,9 @@ export async function createWorks(data) {
 
   let filePath = null;
 
-  // Proses upload gambar
+  // Upload gambar ke Cloudinary
   if (file && file.size > 0) {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Membuat nama file unik
-    const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "_")}`;
-
-    // Menentukan lokasi penyimpanan
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-    const fullPath = path.join(uploadDir, fileName);
-
-    // Simpan file
-    await fs.writeFile(fullPath, buffer);
-
-    // Path yang disimpan ke database
-    filePath = `/uploads/${fileName}`;
+    filePath = await uploadToCloudinary(file);
   }
 
   await getDb().insert(works).values({
@@ -90,33 +90,11 @@ export async function updateWorks(formData) {
 
   // Jika ada gambar baru diunggah
   if (file && file.size > 0) {
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    filePath = await uploadToCloudinary(file);
 
-    // Nama file unik
-    const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "_")}`;
-
-    // Direktori upload
-    const uploadDir = path.join(process.cwd(), "public/uploads");
-    const fullPath = path.join(uploadDir, fileName);
-
-    // Simpan gambar baru
-    await fs.writeFile(fullPath, buffer);
-    filePath = `/uploads/${fileName}`;
-
-    // Hapus gambar lama jika ada
+    // Hapus gambar lama dari Cloudinary jika ada
     if (oldImage) {
-      const oldImagePath = path.join(
-        process.cwd(),
-        "public",
-        oldImage.replace(/^\/+/, "")
-      );
-
-      try {
-        await fs.unlink(oldImagePath);
-      } catch (error) {
-        console.warn("Gagal menghapus gambar lama:", error.message);
-      }
+      await deleteFromCloudinary(oldImage);
     }
   }
 

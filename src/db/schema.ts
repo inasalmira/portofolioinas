@@ -42,6 +42,7 @@ export const works = mysqlTable(
     id: int().primaryKey().autoincrement(),
     judul: varchar({ length: 255 }).notNull(),
     gambar: varchar({ length: 255 }),
+    public_id: varchar({ length: 255 }),
     isi: longtext().notNull(),
     kategori_id: int().notNull(),
     created_at: datetime()
@@ -65,6 +66,7 @@ export const blogs = mysqlTable(
     id: int().primaryKey().autoincrement(),
     judul: varchar({ length: 255 }).notNull(),
     gambar: varchar({ length: 255 }),
+    public_id: varchar({ length: 255 }),
     isi: longtext().notNull(),
     kategori_id: int().notNull(),
     created_at: datetime()
