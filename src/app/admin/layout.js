@@ -1,7 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
-import { logout } from "../(auth)/login/servis";
+import LogoutButton from "./LogoutButton";
+
+export const dynamic = 'force-dynamic';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,11 +65,7 @@ export default function AdminLayout({ children }) {
               <Link href="/admin/kategori" className="hover:text-gray-300">
                 kategori
               </Link>
-              <form action={logout}>
-                <button type="submit" className="hover:underline">
-                  logout
-                </button>
-              </form>
+              <LogoutButton />
             </nav>
           </aside>
           <main className="w-full bg-blue-100">
