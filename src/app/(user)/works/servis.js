@@ -1,7 +1,7 @@
 "use server"
 
 import { comments } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
@@ -17,7 +17,7 @@ export async function komentar(data) {
         redirect('/login');
     }
 
-    await db.insert(comments).values({
+    await getDb().insert(comments).values({
         komentar: komentar,
         work_id: work_id ? Number(work_id) : null,
         blog_id: null,
@@ -28,6 +28,6 @@ export async function komentar(data) {
 }
 
 export async function listkomentar(id) {
-    const data = await db.select().from(comments).where(eq(comments.work_id, id ));
+    const data = await getDb().select().from(comments).where(eq(comments.work_id, id ));
     return data
 }

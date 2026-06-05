@@ -1,14 +1,14 @@
 "use server";
 
 import { kategoris, works } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import fs from "fs/promises";
 import path from "path";
 
 export async function getAllworks() {
-  const data = await db
+  const data = await getDb()
     .select({
       ...works,
       kategori: kategoris.nama,
@@ -20,7 +20,7 @@ export async function getAllworks() {
 
 export async function deleteWorks(data) {
   const id = data.get("id");
-  await db.delete(works).where(eq(works.id, id));
+  await getDb().delete(works).where(eq(works.id, id));
 
   redirect("/admin/works");
 }
@@ -52,7 +52,7 @@ export async function createWorks(data) {
     filePath = `/uploads/${fileName}`;
   }
 
-  await db.insert(works).values({
+  await getDb().insert(works).values({
     judul: judul,
     gambar: filePath ,
     isi: isi,
@@ -63,7 +63,7 @@ export async function createWorks(data) {
 }
 
 export async function showWorks(id) {
-    const data = await db.select({
+    const data = await getDb().select({
       ...works,
       kategori: kategoris.nama,
     }).from(works).where(eq(works.id, id)).limit(1).innerJoin(kategoris, eq(works.kategori_id, kategoris.id));
@@ -79,7 +79,7 @@ export async function updateWorks(formData) {
   const file = formData.get("gambar");
 
   // Ambil data lama dari database
-  const existingData = await db
+  const existingData = await getDb()
     .select()
     .from(works)
     .where(eq(works.id, id))
@@ -121,7 +121,7 @@ export async function updateWorks(formData) {
   }
 
   // Update data di database
-  await db
+  await getDb()
     .update(works)
     .set({
       judul: String(judul),

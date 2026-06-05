@@ -2,11 +2,11 @@
 
 
 import { blogs, comments, users } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 export async function getAllcomments() {
-    const data = await db.select(
+    const data = await getDb().select(
         {
             ...comments,
             user: users.nama,

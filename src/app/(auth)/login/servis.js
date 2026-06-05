@@ -1,7 +1,7 @@
 "use server"
 
 import { users } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -10,7 +10,7 @@ export async function login(data) {
     const email = data.get("email");
     const password = data.get("password");
 
-    const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    const result = await getDb().select().from(users).where(eq(users.email, email)).limit(1);
 
     if (result.length > 0) {
         const user = result[0];

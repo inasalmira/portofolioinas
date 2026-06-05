@@ -2,7 +2,7 @@
 
 
 import { users } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
@@ -12,7 +12,7 @@ export async function register(data) {
     const email = data.get("email");
     const password = data.get("password");
     const role = "user"
-    await db.insert(users).values({
+    await getDb().insert(users).values({
         nama: nama , email: email , password: password , role: role 
     })
 

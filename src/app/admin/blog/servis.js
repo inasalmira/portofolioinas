@@ -1,14 +1,14 @@
 "use server";
 
 import { kategoris, blogs } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import fs from "fs/promises";
 import path from "path";
 
 export async function getAllblogs() {
-  const data = await db
+  const data = await getDb()
     .select({
       ...blogs,
       kategori: kategoris.nama,
@@ -20,7 +20,7 @@ export async function getAllblogs() {
 
 export async function deleteblogs(data) {
   const id = data.get("id");
-  await db.delete(blogs).where(eq(blogs.id, id));
+  await getDb().delete(blogs).where(eq(blogs.id, id));
 
   redirect("/admin/blog");
 }
@@ -52,7 +52,7 @@ export async function createblogs(data) {
     filePath = `/uploads/${fileName}`;
   }
 
-  await db.insert(blogs).values({
+  await getDb().insert(blogs).values({
     judul: judul,
     gambar: filePath ,
     isi: isi,
@@ -63,7 +63,7 @@ export async function createblogs(data) {
 }
 
 export async function showblogs(id) {
-    const data = await db.select({
+    const data = await getDb().select({
       ...blogs,
       kategori: kategoris.nama,
     }).from(blogs).where(eq(blogs.id, id)).limit(1).innerJoin(kategoris, eq(blogs.kategori_id, kategoris.id));
@@ -79,7 +79,7 @@ export async function updateblogs(formData) {
   const file = formData.get("gambar");
 
   // Ambil data lama dari database
-  const existingData = await db
+  const existingData = await getDb()
     .select()
     .from(blogs)
     .where(eq(blogs.id, id))
@@ -121,7 +121,7 @@ export async function updateblogs(formData) {
   }
 
   // Update data di database
-  await db
+  await getDb()
     .update(blogs)
     .set({
       judul: String(judul),

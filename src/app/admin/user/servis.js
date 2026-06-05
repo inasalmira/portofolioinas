@@ -2,18 +2,18 @@
 
 
 import { users } from "../../../db/schema";
-import db from "../../../db/index";
+import { getDb } from "../../../db/index";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 export async function getAllUser() {
-    const data = await db.select().from(users)
+    const data = await getDb().select().from(users)
     return data  
 
 }
 
 export async function deleteUser(data) {
     const id = data.get("id");
-    await db.delete(users).where(eq(users.id, id))
+    await getDb().delete(users).where(eq(users.id, id))
     
     redirect("/admin/user")
 }
@@ -23,7 +23,7 @@ export async function createUser(data) {
     const email = data.get("email");
     const password = data.get("password");
     const role = data.get("role");
-    await db.insert(users).values({ 
+    await getDb().insert(users).values({ 
         nama: nama , email: email , password: password , role: role 
     })
 
@@ -32,7 +32,7 @@ export async function createUser(data) {
 }
 
 export async function showUser(id) {
-    const data = await db.select().from(users).where(eq(users.id, id)).limit(1)
+    const data = await getDb().select().from(users).where(eq(users.id, id)).limit(1)
     return data[0]
 
 }
@@ -43,7 +43,7 @@ export async function updateUser(data) {
     const email = data.get("email");
     const password = data.get("password");
     const role = data.get("role");
-    await db.update(users).set({
+    await getDb().update(users).set({
         nama: nama , email: email , password: password , role: role 
     }) .where(eq(users.id, id));
 
